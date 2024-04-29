@@ -1,0 +1,30 @@
+# Cypress generated files #
+############################
+
+# Ignore Cypress videos
+/cypress/videos/
+
+# Ignore Cypress screenshots
+/cypress/screenshots/
+
+# Ignore the Cypress binary cache
+/.cache/
+
+# Ignore the Cypress configuration file
+/cypress.env.json
+
+# Ignore the Cypress fixtures (if used)
+/cypress/fixtures/
+
+# Ignore the Cypress plugins (if used)
+/cypress/plugins/
+
+# Ignore the Cypress support files
+/cypress/support/
+
+
+# Node.js dependencies #
+########################
+
+# Ignore the node_modules directory
+node_modules/
