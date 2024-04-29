@@ -21,8 +21,6 @@ describe('Alerts', ()=>{
             expect(t).contains('I am a confirm alert')
             return false
         })
-        //cy.on('window:confirm', ()=>false)
-        
 
         cy.get('#confirmexplanation').should('have.text', 'You clicked Cancel, confirm returned false.')
         
