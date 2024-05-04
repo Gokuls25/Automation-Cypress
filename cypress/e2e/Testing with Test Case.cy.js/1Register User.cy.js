@@ -80,4 +80,52 @@ describe('AutomationExercise', ()=>{
 
     })
 
+    it('Login User with correct email and password', ()=>{
+
+        cy.visit('https://automationexercise.com/')
+
+        //Verify that home page is visible successfully
+
+        cy.get('#slider-carousel > .carousel-inner').should('be.visible')
+
+        //Click on 'Signup / Login' button
+
+        cy.get('[href="/login"]').click()
+
+        //Login with Email and Password
+
+        cy.get('[data-qa="login-email"]').type('gokul@bcmail.com')
+        cy.get('[data-qa="login-password"]').type('passkey123')
+        cy.get('[data-qa="login-button"]').click()
+        cy.get('.header-middle').should('be.visible')
+
+        //Verify that 'Logged in as username' is visible
+
+        cy.get(':nth-child(10) > a').should('be.visible')
+        
+    })
+
+    it.only('Login User with incorrect email and password', ()=>{
+
+        cy.visit('https://automationexercise.com/')
+
+         //Verify that home page is visible successfully
+
+        cy.get('#slider-carousel > .carousel-inner').should('be.visible')
+
+        //Click on 'Signup / Login' button
+
+        cy.get('[href="/login"]').click()
+
+        //Login with incorrect Email and Password
+
+        cy.get('[data-qa="login-email"]').type('goku@bcmail.com')
+        cy.get('[data-qa="login-password"]').type('passkey23')
+        cy.get('[data-qa="login-button"]').click()
+
+        //Verify error 'Your email or password is incorrect!' is visible
+        cy.get('.login-form > form > p').should('have.text', 'Your email or password is incorrect!')
+
+    })
+
 })
