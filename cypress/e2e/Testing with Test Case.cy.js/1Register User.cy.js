@@ -210,5 +210,6 @@ describe('AutomationExercise', ()=>{
       
           // Submission was successful
           cy.get('.status').should('have.text','Success! Your details have been submitted successfully.').and('be.visible');
+          cy.get('span').click()
         })
         })
