@@ -179,7 +179,7 @@ describe('AutomationExercise', ()=>{
         cy.get('.signup-form > form > p').should('be.visible').and('have.text', 'Email Address already exist!')
     })
 
-    it.only('Contact Us Form', ()=>{
+    it('Contact Us Form', ()=>{
 
         cy.visit('https://automationexercise.com/')
         
