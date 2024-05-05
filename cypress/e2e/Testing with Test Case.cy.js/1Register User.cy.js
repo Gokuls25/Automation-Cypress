@@ -105,7 +105,7 @@ describe('AutomationExercise', ()=>{
         
     })
 
-    it.only('Login User with incorrect email and password', ()=>{
+    it('Login User with incorrect email and password', ()=>{
 
         cy.visit('https://automationexercise.com/')
 
@@ -128,4 +128,87 @@ describe('AutomationExercise', ()=>{
 
     })
 
-})
+    it('Logout User', ()=>{
+
+        cy.visit('https://automationexercise.com/')
+
+        //Verify that home page is visible successfully
+
+        cy.get('#slider-carousel > .carousel-inner').should('be.visible')
+
+        //Click on 'Signup / Login' button
+
+        cy.get('[href="/login"]').click()
+
+        //Login with Email and Password
+
+        cy.get('[data-qa="login-email"]').type('gokul@bcmail.com')
+        cy.get('[data-qa="login-password"]').type('passkey123')
+        cy.get('[data-qa="login-button"]').click()
+        cy.get('.header-middle').should('be.visible')
+
+        //Logout user
+        cy.get('[href="/logout"]').click()
+        cy.get('body').should('be.visible')
+
+    })
+
+    it('Register User with existing email', ()=>{
+
+        cy.visit('https://automationexercise.com/')
+
+        //Verify that home page is visible successfully
+
+        cy.get('#slider-carousel > .carousel-inner').should('be.visible')
+
+        //Click on 'Signup / Login' button
+
+        cy.get('[href="/login"]').click()
+
+        //Verify 'New User Signup!' is visible
+        cy.get('.signup-form').should('be.visible')
+
+        //Enter name and email address
+        cy.get('[data-qa="signup-name"]').type('Gokul')
+        cy.get('[data-qa="signup-email"]').type('gokul@bcmail.com')
+
+        //Click 'Signup' button
+        cy.get('[data-qa="signup-button"]').click()
+
+        // Verify error 'Email Address already exist!' is visible
+        cy.get('.signup-form > form > p').should('be.visible').and('have.text', 'Email Address already exist!')
+    })
+
+    it.only('Contact Us Form', ()=>{
+
+        cy.visit('https://automationexercise.com/')
+        
+        //Verify that home page is visible successfully
+        cy.get('#slider-carousel > .carousel-inner').should('be.visible')
+
+        //Click on 'Contact Us' button
+        cy.get('[href="/contact_us"]').click()
+
+        //Verify 'GET IN TOUCH' is visible
+        cy.get('div.contact-form > .title').should('be.visible').and('have.text', 'Get In Touch')
+
+        //Enter name, email, subject and message
+        cy.get('[data-qa="name"]').type('Gokul')
+        cy.get('[data-qa="email"]').type('gokul@abcmail.com')
+        cy.get('[data-qa="subject"]').type('Element not visible')
+        cy.get('[data-qa="message"]').type('Certain elements are not visible')
+
+        //Upload file
+        cy.fixture('../fixtures/example.pdf').then(pdfContent => {
+            cy.get('[name="upload_file"]').attachFile({
+              fileContent: pdfContent.toString(),
+              fileName: 'example.pdf',
+              mimeType: 'application/pdf'
+            })
+          })
+          cy.get('[data-qa="submit-button"]').click();
+      
+          // Submission was successful
+          cy.get('.status').should('have.text','Success! Your details have been submitted successfully.').and('be.visible');
+        })
+        })
