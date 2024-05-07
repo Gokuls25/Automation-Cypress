@@ -33,8 +33,23 @@ describe('Customer Login', ()=>{
 
         //Checking if withdrawal could be successfull
         cy.get('[ng-class="btnClass3"]').click()
-        cy.get('.form-control').type('100')
+        cy.get('.form-control').type('1000')
         cy.get('form.ng-dirty > .btn').click()
         cy.get('.error').should('have.text', 'Transaction successful')
+        cy.wait(1000)
+
+        //Checking Transaction Details are available
+        cy.get('[ng-class="btnClass1"]').click()
+        cy.get('.table').should('be.visible')
+        cy.get('#anchor0 > :nth-child(2)').should('have.text', '1567')
+        cy.get('#anchor0 > :nth-child(3)').should('have.text', 'Credit')
+        cy.get('#anchor1 > :nth-child(2)').should('have.text', '1000')
+        cy.get('#anchor1 > :nth-child(3)').should('have.text', 'Debit')
+        cy.get('.fixedTopBox > [style="float:left"]').click()
+
+
+       //Checking if Rupee is available
+        cy.get('[name="accountSelect"]').select('1006').should('have.value', 'number:1006')
+        cy.get('.borderM > :nth-child(3) > :nth-child(3)').should('have.text', 'Rupee')
     })
 })
