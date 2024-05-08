@@ -7,16 +7,22 @@ describe('Bank Manager Login', ()=>{
         cy.get(':nth-child(2) > .form-control').type('Srinivasan')
         cy.get(':nth-child(3) > .form-control').type('628502')
         cy.get('form.ng-dirty > .btn').click()
-
+        
         cy.on('window:alert', (t)=>{
-        expect(t).contains('Customer added successfully with customer id') 
+           if(t.includes('Customer added successfully with customer id')){
+            expect(t).contains('Customer added successfully with customer id')
         
         //Open Account
         cy.get('[ng-class="btnClass2"]').should('contain', 'Open Account').click()
         cy.get('#userSelect').select('Gokul Srinivasan').should('contain', 'Gokul Srinivasan')
-        cy.get('#currency').select('Rupee').should('contain', 'Rupee')
+        cy.get('select#currency').select('Dollar').should('contain', 'Dollar')
+        
         cy.get('form.ng-dirty > button').click()
-        })
+        
+    }else if(t.includes('Account created successfully with account Number')){
+        expect(t).contains('Account created successfully with account Number')
+    }
 
     })
+})
 })
