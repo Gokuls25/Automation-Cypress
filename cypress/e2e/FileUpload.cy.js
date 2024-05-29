@@ -29,4 +29,10 @@ describe('File Upload ', ()=>{
         cy.get('input#filesToUpload').attachFile(['example.pdf','Resume.pdf'])
         cy.get(':nth-child(6) > strong').should('contain.text', 'Files You Selected')
     })
+
+    it('Shadow Dom', ()=>{
+        cy.visit('https://www.htmlelements.com/demos/fileupload/shadow-dom/index.htm')
+        cy.get('.smart-browse-input', {includeShadowDom: true}).attachFile('example.pdf')
+        cy.get('.smart-file-upload-container', {includeShadowDom: true}).contains('example.pdf')
+    })
 })
