@@ -16,6 +16,7 @@ describe('Menu', ()=>{
         cy.get('.yes').click()
         cy.get('.pay').should('have.text', 'Total: $39.00')
         cy.get('.pay').should('not.eq', 'Total: $10.00')
-
+        cy.get('.pay').trigger('mouseover')
+        cy.get('div.pay-container>ul>li>div.unit-controller>button[aria-label="Remove one (Discounted) Mocha"]').click()
     })
 })

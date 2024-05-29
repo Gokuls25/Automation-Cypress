@@ -1,10 +1,10 @@
 describe('Dropdown',()=>{
-    it.skip('Select Dropdown', ()=>{
+    it('Select Dropdown', ()=>{
         cy.visit('https://www.zoho.com/commerce/free-demo.html')
         cy.get('#zcf_address_country').select('Maldives').should('have.value', 'Maldives')
     })
 
-    it.skip('Auto suggest dropdown', ()=>{
+    it('Auto suggest dropdown', ()=>{
         cy.visit("https://www.wikipedia.org/")
         cy.get('#searchInput').type('Chennai')
         cy.get('.suggestions-dropdown').contains('Chennai Super Kings').click()

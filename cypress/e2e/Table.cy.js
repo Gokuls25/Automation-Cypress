@@ -31,7 +31,7 @@ describe('Table', ()=>{
         })
     })
 
-    it.only('Pagination' , ()=>{
+    it('Pagination' , ()=>{
 
        /* let totalPages;
         cy.get('.col-sm-6 text-end').then((e)=>{
