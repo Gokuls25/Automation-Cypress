@@ -21,6 +21,18 @@ describe('Home Page',()=>{
         cy.get('.item-box').should('have.length', '7')
         //Number of elements under News
         cy.get('.news-item').should('have.length','3')
+        //Check Community poll is available
+        cy.get('.home-page-polls').should('be.visible').and('contain.text', 'Community poll')
+        //Check if 'Do you Like NOPCommerce question is available
+        cy.get('.poll-display-text').should('have.text', 'Do you like nopCommerce?')
+        //Check if check box is checked
+        cy.get('#pollanswers-1').check().should('be.checked')
+        cy.get('#pollanswers-2').check().should('be.checked')
+        cy.get('#pollanswers-3').check().should('be.checked')
+        cy.get('#pollanswers-4').check().should('be.checked')
+        //Check if Vote can be accessed 
+        cy.get('#vote-poll-1').click()
+        cy.get('.poll-vote-error').should('have.text', 'Only registered users can vote.')
         
     })
 
